@@ -1,5 +1,5 @@
 class Solution:
-    def trap(self, height: list[int]) -> int:
+    def trap(self, height: list[int]) -> int:  # Time Limit Exceeded.
         result, floor = 0, 0
         while True:
             left, right = 0, len(height) - 1
