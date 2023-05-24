@@ -1,15 +1,29 @@
 class Solution:
-    def threeSum(self, nums: list[int]) -> list[list[int]]:
+    def threeSum(self, nums: list[int]) -> list[list[int]]:  # Time Limit Exceeded.
+        nums.sort()
+        # return nums
         result = []
-        for i in range(len(nums) - 2):
-            for j in range(i + 1, len(nums) - 1):
-                if (-1) * (nums[i] + nums[j]) in nums[j + 1:]:
-                    lst = [nums[i], nums[j], (-1) * (nums[i] + nums[j])]
-                    for k in result:
-                        if set(lst) == set(k):
+        left, right = 0, len(nums) - 1
+        while nums[left] <= 0 and left <= right - 2:
+            while nums[right] >= 0 and left + 2 <= right:
+                total = nums[left] + nums[right]
+                if total >= 0:
+                    center = left + 1
+                    while nums[left] + nums[center] + nums[right] <= 0 and center < right:
+                        if nums[left] + nums[center] + nums[right] == 0 and [nums[left], nums[center], nums[right]] not in result[::-1]:
+                            result.append([nums[left], nums[center], nums[right]])
                             break
-                    else:
-                        result.append(lst)
+                        center += 1
+                else:
+                    center = right - 1
+                    while nums[left] + nums[center] + nums[right] >= 0 and left < center:
+                        if nums[left] + nums[center] + nums[right] == 0 and [nums[left], nums[center], nums[right]] not in result[::-1]:
+                            result.append([nums[left], nums[center], nums[right]])
+                            break
+                        center -= 1
+                right -= 1
+            left += 1
+            right = len(nums) - 1
         return result
 
 
