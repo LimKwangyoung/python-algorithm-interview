@@ -18,10 +18,10 @@ class Solution:
 
 
 if __name__ == '__main__':
-    def singly_linked_list(val_lst: str):
-        if not val_lst:
+    def singly_linked_list(val_str: str):
+        if not val_str:
             return None
-        val_lst = list(map(int, val_lst.split('->')))
+        val_lst = list(map(int, val_str.split('->')))
 
         head_node = ListNode(val_lst[0])
         cur_node = head_node
@@ -32,5 +32,5 @@ if __name__ == '__main__':
         return head_node
 
     solution = Solution()
-    print(solution.isPalindrome(singly_linked_list('')))
+    print(solution.isPalindrome(singly_linked_list('1->2')))
     print(solution.isPalindrome(singly_linked_list('1->2->2->1')))
