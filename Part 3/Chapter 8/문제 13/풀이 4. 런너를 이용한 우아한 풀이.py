@@ -13,6 +13,10 @@ class Solution:
         while fast and fast.next:
             fast = fast.next.next
             rev, rev.next, slow = slow, rev, slow.next
+            # rev_next = rev
+            # rev = slow
+            # slow = slow.next
+            # rev.next = rev_next
         if fast:
             slow = slow.next
 
@@ -28,13 +32,13 @@ if __name__ == '__main__':
             return None
         val_lst = list(map(int, val_str.split('->')))
 
-        head_node = ListNode(val_lst[0])
-        cur_node = head_node
+        head = ListNode(val_lst[0])
+        cur = head
         for i in val_lst[1:]:
-            cur_node.next = ListNode(i)
-            cur_node = cur_node.next
+            cur.next = ListNode(i)
+            cur = cur.next
 
-        return head_node
+        return head
 
     solution = Solution()
     print(solution.isPalindrome(singly_linked_list('1->2')))

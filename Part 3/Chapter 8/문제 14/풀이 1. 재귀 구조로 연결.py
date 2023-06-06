@@ -6,24 +6,12 @@ class ListNode:
 
 
 class Solution:
-    def isPalindrome(self, head: ListNode) -> bool:
-        q: list = []
-
-        if not head:
-            return True
-
-        node = head
-        # 리스트 변환
-        while node is not None:
-            q.append(node.val)
-            node = node.next
-
-        # 팰린드롬 판별
-        while len(q) > 1:
-            if q.pop(0) != q.pop():
-                return False
-
-        return True
+    def mergeTwoLists(self, list1: ListNode, list2: ListNode) -> ListNode:
+        if (not list1) or (list2 and list1.val > list2.val):
+            list1, list2 = list2, list1
+        if list1:
+            list1.next = self.mergeTwoLists(list1.next, list2)
+        return list1
 
 
 if __name__ == '__main__':
@@ -41,5 +29,7 @@ if __name__ == '__main__':
         return head
 
     solution = Solution()
-    print(solution.isPalindrome(singly_linked_list('1->2')))
-    print(solution.isPalindrome(singly_linked_list('1->2->2->1')))
+    result = solution.mergeTwoLists(singly_linked_list('1->2->4'), singly_linked_list('1->3->4'))
+    while result:
+        print(result.val, end=' ')
+        result = result.next

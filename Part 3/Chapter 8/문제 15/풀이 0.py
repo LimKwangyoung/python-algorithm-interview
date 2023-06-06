@@ -6,24 +6,12 @@ class ListNode:
 
 
 class Solution:
-    def isPalindrome(self, head: ListNode) -> bool:
-        q: list = []
-
-        if not head:
-            return True
-
+    def reverseList(self, head: ListNode) -> ListNode:
         node = head
-        # 리스트 변환
-        while node is not None:
-            q.append(node.val)
-            node = node.next
-
-        # 팰린드롬 판별
-        while len(q) > 1:
-            if q.pop(0) != q.pop():
-                return False
-
-        return True
+        rev = None
+        while node:
+            rev, rev.next, node = node, rev, node.next
+        return rev
 
 
 if __name__ == '__main__':
@@ -41,5 +29,7 @@ if __name__ == '__main__':
         return head
 
     solution = Solution()
-    print(solution.isPalindrome(singly_linked_list('1->2')))
-    print(solution.isPalindrome(singly_linked_list('1->2->2->1')))
+    result = solution.reverseList(singly_linked_list('1->2->3->4->5'))
+    while result:
+        print(result.val, end=' ')
+        result = result.next
