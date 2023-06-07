@@ -13,10 +13,10 @@ class Solution:
         while fast and fast.next:
             fast = fast.next.next
             rev, rev.next, slow = slow, rev, slow.next
-            # rev_next = rev
+            # next_rev = rev
             # rev = slow
             # slow = slow.next
-            # rev.next = rev_next
+            # rev.next = next_rev
         if fast:
             slow = slow.next
 

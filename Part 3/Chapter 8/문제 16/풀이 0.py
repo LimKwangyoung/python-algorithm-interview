@@ -6,12 +6,7 @@ class ListNode:
 
 
 class Solution:
-    def reverseList(self, head: ListNode) -> ListNode:
-        node = head
-        prev = None
-        while node:
-            prev, prev.next, node = node, prev, node.next
-        return prev
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
 
 
 if __name__ == '__main__':
@@ -29,7 +24,7 @@ if __name__ == '__main__':
         return head
 
     solution = Solution()
-    result = solution.reverseList(singly_linked_list('1->2->3->4->5'))
+    result = solution.addTwoNumbers(singly_linked_list('2->4->3'), singly_linked_list('5->6->4'))
     while result:
         print(result.val, end=' ')
         result = result.next
