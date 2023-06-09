@@ -29,7 +29,7 @@ if __name__ == '__main__':
         return head
 
     solution = Solution()
-    result = solution.mergeTwoLists(singly_linked_list('1->2->4'), singly_linked_list('1->3->4'))
-    while result:
-        print(result.val, end=' ')
-        result = result.next
+    solution_node = solution.mergeTwoLists(singly_linked_list('1->2->4'), singly_linked_list('1->3->4'))
+    while solution_node:
+        print(solution_node.val, end=' ')
+        solution_node = solution_node.next

@@ -31,7 +31,7 @@ if __name__ == '__main__':
         return head
 
     solution = Solution()
-    result = solution.reverseList(singly_linked_list('1->2->3->4->5'))
-    while result:
-        print(result.val, end=' ')
-        result = result.next
+    solution_node = solution.reverseList(singly_linked_list('1->2->3->4->5'))
+    while solution_node:
+        print(solution_node.val, end=' ')
+        solution_node = solution_node.next

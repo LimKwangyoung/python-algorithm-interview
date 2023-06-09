@@ -7,41 +7,25 @@ class ListNode:
 
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        head = ListNode()
-        node = head
+        root = head = ListNode(0)
 
-        round_up = 0
-        while l1 and l2:
-            num = l1.val + l2.val + round_up
-            round_up = num // 10
-            num %= 10
+        carry = 0
+        while l1 or l2 or carry:
+            total = 0
+            # 두 입력값의 합 계산
+            if l1:
+                total += l1.val
+                l1 = l1.next
+            if l2:
+                total += l2.val
+                l2 = l2.next
 
-            l1, l2 = l1.next, l2.next
-            node.next = ListNode(num)
-            node = node.next
+            # 몫(자리올림수)과 나머지(값) 계산
+            carry, val = divmod(total + carry, 10)
+            head.next = ListNode(val)
+            head = head.next
 
-        while l1:
-            num = l1.val + round_up
-            round_up = num // 10
-            num %= 10
-
-            l1 = l1.next
-            node.next = ListNode(num)
-            node = node.next
-
-        while l2:
-            num = l2.val + round_up
-            round_up = num // 10
-            num %= 10
-
-            l2 = l2.next
-            node.next = ListNode(num)
-            node = node.next
-
-        if round_up:
-            node.next = ListNode(round_up)
-
-        return head.next
+        return root.next
 
 
 if __name__ == '__main__':
