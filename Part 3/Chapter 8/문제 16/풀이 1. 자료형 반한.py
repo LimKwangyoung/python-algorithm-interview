@@ -39,8 +39,7 @@ class Solution:
         a = self.toList(self.reverseList(l1))
         b = self.toList(self.reverseList(l2))
 
-        resultStr = int(''.join(str(e) for e in a)) + \
-                    int(''.join(str(e) for e in b))
+        resultStr = int(''.join(str(e) for e in a)) + int(''.join(str(e) for e in b))
 
         # 최종 계산 결과 연결 리스트 변환
         return self.toReversedLinkedList(str(resultStr))
