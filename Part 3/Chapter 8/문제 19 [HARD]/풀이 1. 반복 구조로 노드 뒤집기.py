@@ -7,21 +7,21 @@ class ListNode:
 
 class Solution:
     def reverseBetween(self, head: ListNode, left: int, right: int) -> ListNode:
-        if not head.next:
+        # 예외 처리
+        if not head or left == right:
             return head
-        root = node = ListNode(next=head)
 
+        root = start = ListNode(None)
+        root.next = head
+        # start, end 지정
         for _ in range(left - 1):
-            node = node.next
-        left_prev = node
-        left_node = node = node.next
+            start = start.next
+        end = start.next
 
-        prev = None
-        for _ in range(right - left + 1):
-            next_node, node.next = node.next, prev
-            node, prev = next_node, node
-        left_prev.next, left_node.next = prev, node
-
+        # 반복하면서 노드 차례대로 뒤집기
+        for _ in range(right - left):
+            tmp, start.next, end.next = start.next, end.next, end.next.next
+            start.next.next = tmp
         return root.next
 
 
@@ -38,6 +38,7 @@ if __name__ == '__main__':
             cur = cur.next
 
         return head
+
 
     solution = Solution()
     solution_node = solution.reverseBetween(singly_linked_list('1->2->3->4->5'), 2, 4)
