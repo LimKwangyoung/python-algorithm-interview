@@ -37,6 +37,7 @@ if __name__ == '__main__':
 
         return head
 
+
     solution = Solution()
     solution_node = solution.mergeKLists([
         singly_linked_list('1->4->5'),
