@@ -1,3 +1,6 @@
+import heapq
+
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -7,20 +10,25 @@ class ListNode:
 
 class Solution:
     def mergeKLists(self, lists: list[ListNode]) -> ListNode:
-        root = node = ListNode()
+        root = result = ListNode(None)
+        heap = []
 
-        while True:
-            min_idx, min_val = 0, None
+        # 각 연결 리슽의 루트를 힙에 저장
+        for i in range(len(lists)):
+            if lists[i]:
+                heapq.heappush(heap, (lists[i].val, i, lists[i]))
 
-            for i in range(len(lists)):
-                if lists[i] is not None and (min_val is None or lists[i].val < min_val):
-                    min_idx, min_val = i, lists[i].val
+        # 힙 추출 이후 다음 노드는 다시 저장
+        while heap:
+            node = heapq.heappop(heap)
+            idx = node[1]
+            result.next = node[2]
 
-            if min_val is None:
-                return root.next
-            node.next = lists[min_idx]
-            node = node.next
-            lists[min_idx] = lists[min_idx].next
+            result = result.next
+            if result.next:
+                heapq.heappush(heap, (result.next.val, idx, result.next))
+
+        return root.next
 
 
 if __name__ == '__main__':
