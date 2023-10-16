@@ -2,27 +2,22 @@ import collections
 
 
 class Solution:
-    def findItinerary(self, tickets: list[list[str]]) -> list[str]:  # wrong answer
+    def findItinerary(self, tickets: list[list[str]]) -> list[str]:
         airlines = collections.defaultdict(list)
         for i, j in tickets:
             airlines[i].append(j)
         for i in airlines:
             airlines[i].sort(reverse=True)
 
-        path = ['JFK']
-        airport = path[-1]
-        destination = ''
-        while airlines[airport]:
-            if airlines[airport] and airlines[airlines[airport][-1]]:
-                path.append(airlines[airport].pop())
-                airport = path[-1]
-            elif not destination:
-                destination = airlines[airport].pop()
+        stack = ['JFK']
+        result = []
+        while stack:
+            airport = stack[-1]
+            if airlines[airport]:
+                stack.append(airlines[airport].pop())
             else:
-                path.append(airlines[airport].pop())
-                airport = path[-1]
-
-        return path + [destination]
+                result.append(stack.pop())
+        return result[::-1]
 
 
 if __name__ == '__main__':
