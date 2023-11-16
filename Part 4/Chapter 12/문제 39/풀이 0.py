@@ -3,20 +3,21 @@ import collections
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: list[list[int]]) -> bool:
-        def dfs(course: int) -> bool:
-            visited = set()
-            stack = [course]
-            while stack:
-                course = stack.pop()
-                if course in visited:
-                    return False
-
-                visited.add(course)
-                if not graph[course]:
-                    visited = set()
-                else:
-                    for c in graph[course]:
-                        stack.append(c)
+        def bfs(course: int) -> bool:
+            visited = [None] * numCourses
+            que = collections.deque([course])  # [course, level]
+            visited[course] = 1
+            while que:
+                course = que.popleft()
+                while graph[course]:
+                    c = graph[course].pop()
+                    if course == c:
+                        return False
+                    elif not visited[c] or visited[course] <= visited[c]:
+                        que.append(c)
+                        visited[c] = visited[course] + 1
+                    else:
+                        return False
             return True
 
         graph = collections.defaultdict(list)
@@ -24,14 +25,12 @@ class Solution:
             graph[i].append(j)
 
         for i in range(numCourses):
-            if graph[i] and not dfs(i):
+            if not bfs(i):
                 return False
         return True
 
 
 if __name__ == '__main__':
     solution = Solution()
-    # print(solution.canFinish(2, [[1, 0]]))
-    # print(solution.canFinish(2, [[1, 0], [0, 1]]))
-    # print(solution.canFinish(5, [[0, 1], [0, 2], [2, 1], [1, 3], [2, 3], [3, 4], [4, 2]]))
-    print(solution.canFinish(4, [[2,0],[1,0],[3,1],[3,2],[1,3]]))
+    print(solution.canFinish(2, [[1, 0]]))
+    print(solution.canFinish(2, [[1, 0], [0, 1]]))
